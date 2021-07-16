@@ -19,6 +19,7 @@ class Compile():
         self.lang = lang
         self.input = input
         self.id = id
+        self.output = ""
         self.create_file()
 
     def create_file(self):
