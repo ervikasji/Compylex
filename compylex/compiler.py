@@ -11,7 +11,10 @@ class Compile():
         Attributes:
         code  (string): code to be compiled
         lang (string): programming language used
-        input (string): user input    
+        input (string): user input  
+        id (integer): user id
+        output (string): output of code
+        compile status (string): compilation status code 
     """
 
     def __init__(self, code="", lang="", input="", id=0):
@@ -20,6 +23,7 @@ class Compile():
         self.input = input
         self.id = id
         self.output = ""
+        self.compile_status
         self.create_file()
 
     def create_file(self):
@@ -45,29 +49,43 @@ class Compile():
     def compile_python(self):
         """Function to compile python code and return output.
         Args:
-            code file
-            input file
+            None
         Returns:
-            output of compiled code or error message to be displayed
+            None
         """
         pass
 
     def compile_C(self):
         """Function to compile C code and return output.
         Args:
-            code file
-            input file
+            None
         Returns:
-            output of compiled code or error message to be displayed
+            None
         """
         pass
 
     def compile_cpp(self):
         """Function to compile C++ code and return output.
         Args:
-            code file
-            input file
+            None
         Returns:
-            output of compiled code or error message to be displayed
+            None
         """
         pass
+
+    def output(self):
+        """Function to return output of the code
+        Args:
+            None
+        Returns:
+            Output of the compiled code
+        """
+        pass
+
+    def compile_status(self):
+        """Function to return compilation status code
+        Args:
+            None
+        Returns:
+            Compilation status code
+        """
