@@ -89,3 +89,4 @@ class Compile():
         Returns:
             Compilation status code
         """
+        pass
