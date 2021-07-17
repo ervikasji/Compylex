@@ -24,13 +24,10 @@ class Compile():
 
     def create_file(self):
         """Function to create the code and input files.
-
         Args:
             None
-
         Returns:
             None
-
         """
         if(self.lang == "PYTHON"):
             file = open(self.id+".py", "w")
@@ -47,39 +44,30 @@ class Compile():
 
     def compile_python(self):
         """Function to compile python code and return output.
-
         Args:
             code file
             input file
-
         Returns:
             output of compiled code or error message to be displayed
-
         """
         pass
 
     def compile_C(self):
         """Function to compile C code and return output.
-
         Args:
             code file
             input file
-
         Returns:
             output of compiled code or error message to be displayed
-
         """
         pass
 
     def compile_cpp(self):
         """Function to compile C++ code and return output.
-
         Args:
             code file
             input file
-
         Returns:
             output of compiled code or error message to be displayed
-
         """
         pass
