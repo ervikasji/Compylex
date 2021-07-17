@@ -23,7 +23,7 @@ class Compile():
         self.input = input
         self.id = id
         self.output = ""
-        self.compile_status
+        self.compile_status = ""
         self.create_file()
 
     def create_file(self):
@@ -33,6 +33,13 @@ class Compile():
         Returns:
             None
         """
+        dir = os.path.join(str(Path.home()), ".data")
+        if(path.isdir(dir)):
+            pass
+        else:
+            os.mkdir(dir)
+        os.chdir(dir)
+
         if(self.lang == "PYTHON"):
             file = open(self.id+".py", "w")
             file.write(self.code)
@@ -45,6 +52,15 @@ class Compile():
             file = open(self.id+".cpp", "w")
             file.write(self.code)
             file.close()
+
+    def delete_file(self):
+        """Function to delete the code and input files.
+        Args:
+            None
+        Returns:
+            None
+        """
+        pass
 
     def compile_python(self):
         """Function to compile python code and return output.
