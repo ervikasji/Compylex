@@ -33,13 +33,19 @@ class Compile():
 
         """
         if(self.lang == "PYTHON"):
-            pass
+            file = open(self.id+".py", "w")
+            file.write(self.code)
+            file.close()
         elif(self.lang == "C"):
-            pass
+            file = open(self.id+".c", "w")
+            file.write(self.code)
+            file.close()
         elif(self.lang == 'CPP'):
-            pass
+            file = open(self.id+".cpp", "w")
+            file.write(self.code)
+            file.close()
 
-    def compile_python(self, code, input):
+    def compile_python(self):
         """Function to compile python code and return output.
 
         Args:
@@ -52,7 +58,7 @@ class Compile():
         """
         pass
 
-    def compile_C(self, code, input):
+    def compile_C(self):
         """Function to compile C code and return output.
 
         Args:
@@ -65,7 +71,7 @@ class Compile():
         """
         pass
 
-    def compile_cpp(self, code, input):
+    def compile_cpp(self):
         """Function to compile C++ code and return output.
 
         Args:
