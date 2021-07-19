@@ -1,2 +1,2 @@
 from compylex.compiler import Compile
-code = Compile()
+code = Compile("print('hello')", "PYTHON", "", 0)
