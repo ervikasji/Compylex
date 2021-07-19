@@ -10,7 +10,8 @@ class Compile():
 
         Attributes:
         code  (string): code to be compiled
-        lang (string): programming language used
+        lang (string): p
+        programming language used
         input (string): user input
         id (integer): user id
         output (string): output of code
@@ -25,6 +26,13 @@ class Compile():
         self.output = ""
         self.status = ""
         self.create_file()
+        if(self.lang == "PYTHON"):
+            self.compile_python()
+        elif(self.lang == "C"):
+            self.compile_c()
+        elif(self.lang == "CPP"):
+            self.compile_cpp()
+        self.delete_file()
 
     def create_file(self):
         """Function to create the code and input files.
@@ -63,13 +71,15 @@ class Compile():
         Returns:
             None
         """
-        subprocess.call(["rm", self.id+"-input.txt"])
+        os.remove(self.id+"-input.txt")
         if(self.lang == "PYTHON"):
-            subprocess.call(["rm", self.id+".py"])
+            os.remove(self.id+".py")
         elif(self.lang == "C"):
-            subprocess.call(["rm", self.id+".c"])
+            os.remove(self.id+".c")
+            os.remove(self.id+"_c")
         elif(self.lang == 'CPP'):
-            subprocess.call(["rm", self.id+".cpp"])
+            os.remove(self.id+".cpp")
+            os.remove(self.id+"_cpp")
 
     def compile_python(self):
         """Function to compile python code and return output.
@@ -80,16 +90,17 @@ class Compile():
         """
         if(self.input == ""):
             stdout = subprocess.run(
-                ["python3", self.id+".py"], stdout=subprocess.PIPE).stdout.decode('utf-8')
-            stderr = subprocess.run(
-                ["python3", self.id+".py"], stderr=subprocess.PIPE).stderr.decode('utf-8')
+                ["python", self.id+".py"], stdout=subprocess.PIPE).stdout.decode('utf-8')
             self.output = stdout
-            self.status = stderr
-
+            if(len(stdout) == 0):
+                self.status = subprocess.run(
+                    ["python", self.id+".py"], stderr=subprocess.PIPE).stderr.decode('utf-8')
+            else:
+                self.status = "Compiled Successfully"
         else:
             pass
 
-    def compile_C(self):
+    def compile_c(self):
         """Function to compile C code and return output.
         Args:
             None
@@ -97,7 +108,15 @@ class Compile():
             None
         """
         if(self.input == ""):
-            pass
+            stderr = subprocess.run(
+                ["gcc", self.id+".c", "-o", self.id+"_c"], stderr=subprocess.PIPE).stderr.decode('utf-8')
+            if(len(stderr) == 0):
+                self.status = "Compiled Successfully"
+                stdout = subprocess.run(
+                    ["./"+self.id+"_c"], stdout=subprocess.PIPE).stdout.decode('utf-8')
+                self.output = stdout
+            else:
+                self.status = stderr
         else:
             pass
 
@@ -109,7 +128,15 @@ class Compile():
             None
         """
         if(self.input == ""):
-            pass
+            stderr = subprocess.run(
+                ["g++", self.id+".cpp", "-o", self.id+"_cpp"], stderr=subprocess.PIPE).stderr.decode('utf-8')
+            if(len(stderr) == 0):
+                self.status = "Compiled Successfully"
+                stdout = subprocess.run(
+                    ["./"+self.id+"_cpp"], stdout=subprocess.PIPE).stdout.decode('utf-8')
+                self.output = stdout
+            else:
+                self.status = stderr
         else:
             pass
 
