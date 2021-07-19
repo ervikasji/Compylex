@@ -93,10 +93,11 @@ class Compile():
                 ["python", self.id+".py"], stdout=subprocess.PIPE).stdout.decode('utf-8')
             self.output = stdout
             if(len(stdout) == 0):
-                self.status = subprocess.run(
+                self.output = subprocess.run(
                     ["python", self.id+".py"], stderr=subprocess.PIPE).stderr.decode('utf-8')
+                self.status = 0  # error
             else:
-                self.status = "Compiled Successfully"
+                self.status = 1  # success
         else:
             pass
 
@@ -111,12 +112,13 @@ class Compile():
             stderr = subprocess.run(
                 ["gcc", self.id+".c", "-o", self.id+"_c"], stderr=subprocess.PIPE).stderr.decode('utf-8')
             if(len(stderr) == 0):
-                self.status = "Compiled Successfully"
+                self.status = 1
                 stdout = subprocess.run(
                     ["./"+self.id+"_c"], stdout=subprocess.PIPE).stdout.decode('utf-8')
                 self.output = stdout
             else:
-                self.status = stderr
+                self.status = 0
+                self.output = stderr
         else:
             pass
 
@@ -131,12 +133,13 @@ class Compile():
             stderr = subprocess.run(
                 ["g++", self.id+".cpp", "-o", self.id+"_cpp"], stderr=subprocess.PIPE).stderr.decode('utf-8')
             if(len(stderr) == 0):
-                self.status = "Compiled Successfully"
+                self.status = 1
                 stdout = subprocess.run(
                     ["./"+self.id+"_cpp"], stdout=subprocess.PIPE).stdout.decode('utf-8')
                 self.output = stdout
             else:
-                self.status = stderr
+                self.status = 0
+                self.output = stderr
         else:
             pass
 
