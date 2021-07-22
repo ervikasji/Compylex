@@ -76,10 +76,12 @@ class Compile():
             os.remove(self.id+".py")
         elif(self.lang == "C"):
             os.remove(self.id+".c")
-            os.remove(self.id+"_c")
+            if(self.status == 1):
+                os.remove(self.id+"_c")
         elif(self.lang == 'CPP'):
             os.remove(self.id+".cpp")
-            os.remove(self.id+"_cpp")
+            if(self.status == 1):
+                os.remove(self.id+"_cpp")
 
     def compile_python(self):
         """Function to compile python code and return output.
