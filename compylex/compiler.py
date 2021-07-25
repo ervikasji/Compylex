@@ -101,7 +101,15 @@ class Compile():
             else:
                 self.status = 1  # success
         else:
-            pass
+            stdout = subprocess.run(
+                ["python", self.id+".py", "<", self.id+"-input.txt"], stdout=subprocess.PIPE).stdout.decode('utf-8')
+            self.output = stdout
+            if(len(stdout) == 0):
+                self.output = subprocess.run(
+                    ["python", self.id+".py"], stderr=subprocess.PIPE).stderr.decode('utf-8')
+                self.status = 0  # error
+            else:
+                self.status = 1  # success
 
     def compile_c(self):
         """Function to compile C code and return output.
