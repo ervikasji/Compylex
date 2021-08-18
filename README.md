@@ -1,6 +1,6 @@
 # Compylex
 
-Compylex is a package that allows you compile code using a python script.<br> Compylex accepts the code , language and user inputs and returns the output.<br> Compylex uses the perinstalled compilers from your machine and runs them against the inputs given to it.
+Compylex is a package that allows you to compile code using a python script.<br> Compylex accepts the code , language and user inputs and returns the output.<br> Compylex uses the preinstalled compilers from your machine and runs them against the inputs given to it.
 
 # Testing:
 
