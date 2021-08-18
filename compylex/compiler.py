@@ -19,6 +19,9 @@ class Compile():
     """
 
     def __init__(self, code="", lang="", input="", id=0):
+        """
+            This function intialises the class variables with values passed by the user.
+        """
         self.code = code
         self.lang = lang
         self.input = input
