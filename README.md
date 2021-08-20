@@ -2,28 +2,35 @@
 
 Compylex is a package that allows you to compile code using a python script.<br> Compylex accepts the code , language and user inputs and returns the output.<br> Compylex uses the preinstalled compilers from your machine and runs them against the inputs given to it.
 
-# Testing:
+# Installation
+Install Compylex using `pip`
 
-To test compylex run the following code:
+```bash
+pip install compylex
+```
+
+# Testing
+
+To test compylex, run the following code:
 
 ```python
-    from compylex.compiler import Compile
-    code = "print('Hello World!')"
-    lang = "PYTHON"
-    inp = ""
-    run_id = 0
-    CompilerObject = Compile(code, lang, inp, run_id)
-    print(code.get_status())
-    print(code.get_output())
+from compylex.compiler import Compile
+code = "print('Hello World!')"
+lang = "PYTHON"
+inp = ""
+run_id = 0
+CompilerObject = Compile(code, lang, inp, run_id)
+print(code.get_status())
+print(code.get_output())
 
 ```
 
-- code - (String) The code to compile.
-- lang - (String) [All caps] The programming language (PYTHON/C/C++).
-- inp - (String) The inputs that need to passed to the compiler.
-- run_id - (int) An identification number for the compile task.
-- get_status() - Returns the compilation status ( 1 : Success and 0 : Error).
-- get_output() - Returns the compilation output.
+- `code` The code to compile.
+- `lang` The programming language (PYTHON/C/C++).
+- `inp` The inputs that need to passed to the compiler.
+- `run_id` An identification number for the compile task.
+- `get_status()` Returns the compilation status ( 1 : Success and 0 : Error).
+- `get_output()` Returns the compilation output.
 
 # Contributing to Compylex
 
