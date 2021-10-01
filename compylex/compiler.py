@@ -10,8 +10,7 @@ class Compile():
 
         Attributes:
         code  (string): code to be compiled
-        lang (string): p
-        programming language used
+        lang (string): programming language used
         input (string): user input
         id (integer): user id
         output (string): output of code
