@@ -34,6 +34,8 @@ class Compile():
             self.compile_c()
         elif(self.lang == "CPP"):
             self.compile_cpp()
+        elif(self.lang == "JAVA"):      # For Java File 
+            self.compile_java()
         self.delete_file()
 
     def create_file(self):
@@ -62,6 +64,10 @@ class Compile():
             file = open(self.id+".cpp", "w")
             file.write(self.code)
             file.close()
+        elif(self.lang == 'JAVA'):  
+            file = open(self.id+".java", "w")
+            file.write(self.code)
+            file.close()
         file = open(self.id+"-input.txt", "w")
         file.write(self.input)
         file.close()
@@ -84,6 +90,10 @@ class Compile():
             os.remove(self.id+".cpp")
             if(self.status == 1):
                 os.remove(self.id+"_cpp")
+        elif(self.lang == 'JAVA'):
+            os.remove(self.id+".java")
+            if(self.status == 1):
+                os.remove(self.id+"_java")                
 
     def compile_python(self):
         """Function to compile python code and return output.
@@ -102,6 +112,30 @@ class Compile():
                 self.status = 0  # error
             else:
                 self.status = 1  # success
+        else:
+            pass
+
+    # For Java File 
+    
+
+    def compile_java(self):
+        """Function to compile C code and return output.
+        Args:
+            None
+        Returns:
+            None
+        """
+        if(self.input == ""):
+            stderr = subprocess.run(
+                ["javac", self.id+".java"], stderr=subprocess.PIPE).stderr.decode('utf-8')
+            if(len(stderr) == 0):
+                self.status = 1
+                stdout = subprocess.run(
+                    ["java"+self.id], stdout=subprocess.PIPE).stdout.decode('utf-8')
+                self.output = stdout
+            else:
+                self.status = 0
+                self.output = stderr
         else:
             pass
 
