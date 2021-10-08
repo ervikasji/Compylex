@@ -36,6 +36,8 @@ class Compile():
             self.compile_cpp()
         elif(self.lang == "JAVA"):      # For Java File 
             self.compile_java()
+        elif(self.lang=="JS"):
+            self.compile_js()
         self.delete_file()
 
     def create_file(self):
@@ -68,6 +70,11 @@ class Compile():
             file = open(self.id+".java", "w")
             file.write(self.code)
             file.close()
+        elif(self.lang=="JS"):
+            file = open(self.id+".js", "w")
+            file.write(self.code)
+            file.close()
+
         file = open(self.id+"-input.txt", "w")
         file.write(self.input)
         file.close()
@@ -93,7 +100,12 @@ class Compile():
         elif(self.lang == 'JAVA'):
             os.remove(self.id+".java")
             if(self.status == 1):
-                os.remove(self.id+"_java")                
+                os.remove(self.id+"_java") 
+        elif(self.lang == "JS"):
+            os.remove(self.id+".js")
+            # if(self.status == 1):
+            #     os.remove(self.id+"_js")s
+
 
     def compile_python(self):
         """Function to compile python code and return output.
@@ -180,6 +192,27 @@ class Compile():
                 self.output = stderr
         else:
             pass
+    def compile_js(self):
+        """Function to compile C++ code and return output.
+        Args:
+            None
+        Returns:
+            None
+        """
+        if(self.input == ""):
+            stdout = subprocess.run(
+                ["node", self.id+".js"], stdout=subprocess.PIPE).stdout.decode('utf-8')
+            self.output = stdout
+            if(len(stdout) == 0):
+                self.output = subprocess.run(
+                    ["node", self.id+".js"], stderr=subprocess.PIPE).stderr.decode('utf-8')
+                self.status = 0  # error
+            else:
+                self.status = 1  # success
+        else:
+            pass
+
+
 
     def get_output(self):
         """Function to return output of the code
