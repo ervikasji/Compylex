@@ -20,8 +20,8 @@ lang = "PYTHON"
 inp = ""
 run_id = 0
 CompilerObject = Compile(code, lang, inp, run_id)
-print(code.get_status())
-print(code.get_output())
+print(CompilerObject.get_status())
+print(CompilerObject.get_output())
 
 ```
 
