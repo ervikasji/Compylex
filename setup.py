@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name='compylex',
-      version='1.0',
+      version='1.1',
       description='Code compiler',
       url='https://github.com/AshiqAbdulkhader/Compylex',
       packages=['compylex'],
