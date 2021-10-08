@@ -193,7 +193,7 @@ class Compile():
         else:
             pass
     def compile_js(self):
-        """Function to compile C++ code and return output.
+        """Function to compile JavaScript code and return output.
         Args:
             None
         Returns:
