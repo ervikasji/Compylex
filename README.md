@@ -26,7 +26,7 @@ print(CompilerObject.get_output())
 ```
 
 - `code` The code to compile.
-- `lang` The programming language (PYTHON/C/C++).
+- `lang` The programming language (PYTHON/C/C++/JAVA/JS).
 - `inp` The inputs that need to passed to the compiler.
 - `run_id` An identification number for the compile task.
 - `get_status()` Returns the compilation status ( 1 : Success and 0 : Error).
