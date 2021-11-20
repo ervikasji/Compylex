@@ -12,7 +12,7 @@ class Compile():
         code  (string): code to be compiled
         lang (string): programming language used
         input (string): user input
-        id (integer): user id
+        id (string): user id
         output (string): output of code
         compile status (string): compilation status code
     """
@@ -24,7 +24,7 @@ class Compile():
         self.code = code
         self.lang = lang
         self.input = input
-        self.id = str(id)
+        self.id = id
         self.output = ""
         self.status = ""
         self.create_file()
