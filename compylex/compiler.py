@@ -40,6 +40,8 @@ class Compile():
             self.compile_js()
         elif(self.lang=="GO"):
             self.compile_go()
+        elif(self.compile_rust()):
+            self.compile_rust()
         self.delete_file()
 
     def create_file(self):
@@ -80,6 +82,10 @@ class Compile():
             file = open(self.id+".go", "w")
             file.write(self.code)
             file.close()
+        elif(self.lang=="RUST"):
+            file = open(self.id+".rs", "w")
+            file.write(self.code)
+            file.close()
 
         file = open(self.id+"-input.txt", "w")
         file.write(self.input)
@@ -111,6 +117,8 @@ class Compile():
             os.remove(self.id+".js")
         elif(self.lang == "GO"):
             os.remove(self.id+".go")
+        elif(self.lang == "RUST"):
+            os.remove(self.id+".rs")
             # if(self.status == 1):
             #     os.remove(self.id+"_js")s
 
@@ -235,6 +243,26 @@ class Compile():
                 self.status = 0  # error
             else:
                 self.status = 1
+        else:
+            pass
+
+    def compile_rust(self):
+        """Function to compile Rust code and return output.
+        Args:
+            None
+        Returns:
+            None
+        """
+        if(self.input == ""):
+            stdout = subprocess.run(
+                ["rustc", self.id+".rs"], stdout=subprocess.PIPE).stdout.decode('utf-8')
+            self.output = stdout
+            if(len(stdout) == 0):
+                self.output = subprocess.run(
+                    ["./"+self.id], stdout=subprocess.PIPE).stdout.decode('utf-8')
+                self.status = 1
+            else:
+                self.status = 0  # error
         else:
             pass
 
