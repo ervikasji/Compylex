@@ -40,8 +40,10 @@ class Compile():
             self.compile_js()
         elif(self.lang=="GO"):
             self.compile_go()
-        elif(self.compile_rust()):
+        elif(self.lang=="RUST"):
             self.compile_rust()
+        elif(self.lang=="KOTLIN"):
+            self.compile_kotlin()
         self.delete_file()
 
     def create_file(self):
@@ -86,6 +88,10 @@ class Compile():
             file = open(self.id+".rs", "w")
             file.write(self.code)
             file.close()
+        elif(self.lang=="KOTLIN"):
+            file = open(self.id+".kt", "w")
+            file.write(self.code)
+            file.close()
 
         file = open(self.id+"-input.txt", "w")
         file.write(self.input)
@@ -119,6 +125,8 @@ class Compile():
             os.remove(self.id+".go")
         elif(self.lang == "RUST"):
             os.remove(self.id+".rs")
+        elif(self.lang == "KOTLIN"):
+            os.remove(self.id+".kt")
             # if(self.status == 1):
             #     os.remove(self.id+"_js")s
 
@@ -266,6 +274,26 @@ class Compile():
         else:
             pass
 
+    def compile_kotlin(self):
+        """Function to compile Kotlin code and return output.
+        Args:
+            None
+        Returns:
+            None
+        """
+        if(self.input == ""):
+            stderr = subprocess.run(
+                ["kotlinc", self.id+".kt", "-include-runtime", "-d", self.id+"_kt.jar"], stderr=subprocess.PIPE).stderr.decode('utf-8')
+            if(len(stderr) == 0):
+                self.status = 1
+                stdout = subprocess.run(
+                    ["java", "-jar", self.id+"_kt.jar"], stdout=subprocess.PIPE).stdout.decode('utf-8')
+                self.output = stdout
+            else:
+                self.status = 0
+                self.output = stderr
+        else:
+            pass
     
 
 
