@@ -38,6 +38,8 @@ class Compile():
             self.compile_java()
         elif(self.lang=="JS"):
             self.compile_js()
+        elif(self.lang=="GO"):
+            self.compile_go()
         self.delete_file()
 
     def create_file(self):
@@ -74,6 +76,10 @@ class Compile():
             file = open(self.id+".js", "w")
             file.write(self.code)
             file.close()
+        elif(self.lang=="GO"):
+            file = open(self.id+".go", "w")
+            file.write(self.code)
+            file.close()
 
         file = open(self.id+"-input.txt", "w")
         file.write(self.input)
@@ -103,6 +109,8 @@ class Compile():
                 os.remove(self.id+"_java") 
         elif(self.lang == "JS"):
             os.remove(self.id+".js")
+        elif(self.lang == "GO"):
+            os.remove(self.id+".go")
             # if(self.status == 1):
             #     os.remove(self.id+"_js")s
 
@@ -128,8 +136,6 @@ class Compile():
             pass
 
     # For Java File 
-    
-
     def compile_java(self):
         """Function to compile C code and return output.
         Args:
@@ -211,6 +217,28 @@ class Compile():
                 self.status = 1  # success
         else:
             pass
+
+    def compile_go(self):
+        """Function to compile Go code and return output.
+        Args:
+            None
+        Returns:
+            None
+        """
+        if(self.input == ""):
+            stdout = subprocess.run(
+                ["go", "run", self.id+".go"], stdout=subprocess.PIPE).stdout.decode('utf-8')
+            self.output = stdout
+            if(len(stdout) == 0):
+                self.output = subprocess.run(
+                    ["go", "run", self.id+".go"], stderr=subprocess.PIPE).stderr.decode('utf-8')
+                self.status = 0  # error
+            else:
+                self.status = 1
+        else:
+            pass
+
+    
 
 
 
